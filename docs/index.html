@@ -18,10 +18,12 @@
 
 <body>
   <nav>
-    <div class="logo">
+
+    <a href="/" class="logo">
       <img src="../static-asset/images/logo.svg" alt="">
       ApiFlux
-    </div>
+    </a>
+
     <ul>
       <li><a href="/#features">Features</a></li>
       <li><a href="/#workflow">How It Works</a></li>
@@ -46,9 +48,9 @@
           <li>
             <a href="#core-concepts">Core Concepts</a>
             <ul>
+              <li><a href="#workflows">Workflows</a></li>
               <li><a href="#nodes">Nodes</a></li>
               <li><a href="#edges">Edges</a></li>
-              <li><a href="#workflows">Workflows</a></li>
               <li><a href="#variables">Variables</a></li>
             </ul>
           </li>
@@ -57,14 +59,14 @@
           <li><a href="#execution">Workflow Execution</a></li>
           <li><a href="#best-practices">Best Practices</a></li>
           <li><a href="#troubleshooting">Troubleshooting</a></li>
-          <li><a href="#api-reference">API Reference</a>
+          <!-- <li><a href="#api-reference">API Reference</a>
             <ul>
               <li><a href="#proxy-api">Proxy API</a></li>
               <li><a href="#workflow-api">Workflow API</a></li>
               <li><a href="#node-api">Node API</a></li>
             </ul>
-          </li>
-          <li><a href="#examples">Examples</a></li>
+          </li> -->
+          <!-- <li><a href="#examples">Examples</a></li> -->
         </ul>
       </div>
     </aside>
@@ -137,13 +139,14 @@
 
         <ol>
           <li><strong>Create an account</strong> - Sign up for a free account at <a
-              href="https://apiflux.io">apiflux.io</a></li>
+              href="https://apiflux.in">apiflux.in</a></li>
           <li><strong>Create a new workflow</strong> - From the dashboard, click "New Workflow"</li>
           <li><strong>Add nodes</strong> - Add HTTP and Functional nodes from the sidebar</li>
           <li><strong>Connect nodes</strong> - Create connections between nodes by dragging from source to target
             handles</li>
           <li><strong>Execute your workflow</strong> - Click the "Play" button to run your workflow</li>
-          <li><strong>Import and Export your workflow</strong> - Use the "Import" and "Export" buttons in the dashboard to download/share or upload your workflow configurations.</li>
+          <li><strong>Import and Export your workflow</strong> - Use the "Import" and "Export" buttons in the dashboard
+            to download/share or upload your workflow configurations.</li>
         </ol>
 
         <h3>System Requirements</h3>
@@ -158,7 +161,7 @@
 
       <section id="core-concepts" class="section">
         <h2>Core Concepts</h2>
-        
+
         <h3 id="workflows">Workflows</h3>
         <p>A workflow is a collection of nodes and edges that define a complete process. Workflows in ApiFlux have the
           following characteristics:</p>
@@ -171,13 +174,15 @@
         </ul>
 
 
-        <h3 id="nodes">Nodes</h3>
-        <p>Nodes are the building blocks of ApiFlux workflows. There are two primary types of nodes:</p>
+        <section id="nodes">
+          <h3>Nodes</h3>
+          <p>Nodes are the building blocks of ApiFlux workflows. There are two primary types of nodes:</p>
 
-        <ul>
-          <li><strong>HTTP Node</strong> - For making HTTP requests to APIs</li>
-          <li><strong>Functional Node</strong> - For transforming data between API calls</li>
-        </ul>
+          <ul>
+            <li><strong>HTTP Node</strong> - For making HTTP requests to APIs</li>
+            <li><strong>Functional Node</strong> - For transforming data between API calls</li>
+          </ul>
+        </section>
 
         <!-- <div class="image-container">
           <img src="https://placeholder.pics/svg/600x300/DEDEDE/555555/Node%20Types" alt="Node Types">
@@ -205,7 +210,7 @@
         <p>Variables are a fundamental part of nodes and define their state. Each variable has a connection handle that
           enables it to be connected to other nodes in the workflow through data flow edges.</p>
 
-        <div class="image-container" style="max-width: 300px;" >
+        <div class="image-container" style="max-width: 300px;">
           <img src="../static-asset/images/ss/variable.png" alt="Variable Types">
           <p class="image-caption">Static and dynamic variables in a node</p>
         </div>
@@ -230,8 +235,7 @@
         </ul>
 
         <div class="image-container" style="max-width: 300px;">
-          <img src="../static-asset/images/ss/apiNode.png"
-            alt="HTTP Node Configuration">
+          <img src="../static-asset/images/ss/apiNode.png" alt="HTTP Node Configuration">
           <p class="image-caption">HTTP Node Configuration Interface</p>
         </div>
 
@@ -264,8 +268,7 @@
         </ul>
 
         <div class="image-container" style="max-width: 300px;">
-          <img src="../static-asset/images/ss/functionalNode.png"
-            alt="Functional Node Editor">
+          <img src="../static-asset/images/ss/functionalNode.png" alt="Functional Node Editor">
           <p class="image-caption">Functional Node Code Editor</p>
         </div>
 
@@ -562,17 +565,16 @@ function formatUserList(input) {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
-
-          nav.classList.remove('active'); // Close mobile menu if open
-
-          const targetId = this.getAttribute('href');
-          if (targetId === '#') return;
-
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: 'smooth'
+          const activeLink = document.querySelector('.sidebar-nav a.active');
+          if (activeLink) {
+            activeLink.classList.remove('active');
+          }
+          this.classList.add('active');
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
             });
           }
         });
